@@ -20,7 +20,7 @@ export default function ImagePicker() {
   return (
     <>
       <p className="form-control">
-        <label htmlFor="image">Image URL</label>
+        <label htmlFor="image">Image</label>
         <input
           type="file"
           accept="image/png, image/jpeg"
