@@ -1,7 +1,8 @@
 'use server'
 
 import { uploadImage } from '@/lib/cloudinary'
-import { storePost } from '@/lib/posts'
+import { storePost, updatePostLikeStatus } from '@/lib/posts'
+import { revalidatePath } from 'next/cache'
 
 const { redirect } = require('next/navigation')
 
@@ -48,6 +49,11 @@ export async function createPost(prevState, formData) {
   }
 
   await storePost(post)
-
+  revalidatePath('/', 'layout')
   redirect('/feed')
+}
+
+export async function togglePostLiskeStatus(postId, userId) {
+  await updatePostLikeStatus(postId, userId)
+  revalidatePath('/', 'layout')
 }
